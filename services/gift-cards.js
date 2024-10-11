@@ -5,15 +5,15 @@ const SQUARE_CONFIG = {
 const OPTIONS_CONFIG = {
   single: {
     url: "https://square.link/u/GB39mKzF",
-    amount: 35,
+    amount: 36,
   },
   fivePass: {
     url: "https://square.link/u/khDO9CE5",
-    amount: 150,
+    amount: 155,
   },
   tenPass: {
     url: "https://square.link/u/oT3RqjIB",
-    amount: 280,
+    amount: 290,
   },
   fiftyDollar: {
     url: "https://square.link/u/fsfdmHkU",
