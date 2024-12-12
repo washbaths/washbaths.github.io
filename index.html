@@ -68,10 +68,40 @@ No outside food or drink. Snacks and beverages available at our cafe.<br><br><br
 
 <br><br><br>
 
-<b>GIFT CARDS</b><br>
+<b>GIFT CARDS</b><br><br>
 
 <a href="https://app.squareup.com/gift/MLAJMV44DAP7E/order">Purchase digital gift cards here</a> <br>
-Physical gift cards available for purchase in-person at the front desk<br>
+*Physical* gift cards available for purchase in-person at the front desk<br>
+
+<div class="gift-cards">
+	<div>Purchase passes online:</div>
+	<select id="top-drop">
+		<option selected value="none">Select Amount</option>
+		<option value="single">Single Entry - $36</option>
+		<option value="fivePass">5 Pass - $155</option>
+		<option value="tenPass">10 Pass - $290</option>
+	</select>
+	<div id="custom-amount-area">
+		<label for="custom-amount">Enter custom amount (in dollars)</label>
+		<input id="custom-amount" type="number" min="1" step="1" value="" pattern="^\d*$"/>
+		<script type="text/javascript">
+			document.getElementById("custom-amount").addEventListener("keydown", (e) => {
+				const pattern = e.target.pattern
+				const oldVal = e.target.value
+				const regex = new RegExp(pattern, 'g')
+				setTimeout(() => {
+					const newVal = e.target.value;
+					if (!regex.test(newVal)) {
+						e.target.value = oldVal
+					}
+				}, 1)
+			})
+		</script>
+	</div>
+	<div id="payment-button-area">
+
+	</div>
+</div>
 
 
 <br>
