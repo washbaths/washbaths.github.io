@@ -62,32 +62,30 @@ configuration if it changes; do not assume an arbitrary branch publishes.
 
 ## Publishing access and local tools
 
-As tested on 2026-09-30:
+Verified on 2026-09-30:
 
-- GitHub Desktop successfully pushed this repository.
-- The GitHub plugin read the repository but its blob upload returned HTTP 403.
-- Local command-line Git could fetch, but push lacked authentication.
-- macOS's system Git was unavailable without developer tools. Desktop's bundled
-  Git worked with its matching executable/helper paths selected below.
+- Apple Command Line Tools are installed; standard `git` now works.
+- Codex recognizes the Washington Baths Website local project as a Git repository.
+- GitHub CLI is installed at `/Users/asherwoodworth/.local/bin/gh` and signed in
+  as `washbaths`, with the credential stored in the macOS keyring.
+- A real Git push of `chore/event-publishing-workflow` succeeded. Agent-managed
+  branch uploads are working; no GitHub Desktop handoff is normally needed.
+- The GitHub plugin previously returned HTTP 403 for writes. Prefer local Git
+  and GitHub CLI rather than relying on that plugin's write access.
 
-For this Mac, an agent can use these **process-local** settings without changing
-global configuration (first confirm these paths still exist):
+Use `git` normally and the absolute GitHub CLI path above if `gh` is not on PATH.
+For checks, use `node` if available; on this Mac the bundled runtime is currently
+`/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node`. Confirm it exists
+before using it. These machine-specific paths are conveniences, not website
+dependencies. Other machines can use their own installed Git, GitHub CLI and Node.
 
-```sh
-export PATH="/Applications/GitHub Desktop.app/Contents/Resources/app/git/bin:$PATH"
-export GIT_EXEC_PATH="/Applications/GitHub Desktop.app/Contents/Resources/app/git/libexec/git-core"
-export GIT_TERMINAL_PROMPT=0
-```
+Check authentication with `gh auth status` (never `gh auth token`). Network or
+sandbox restrictions can make this check fail even when login is valid; obtain
+the required permission and retry before asking the owner to sign in again.
+Never retrieve Desktop credentials, paste tokens into chat, or store credentials
+in this public repository. Request permission before changing authentication.
 
-These settings provide Git, not authentication. For agent-managed publication,
-configure an owner-approved GitHub CLI/credential-helper login or SSH identity,
-then test an actual push to a non-production branch. Do not retrieve credentials
-from GitHub Desktop, paste tokens into chat, or store credentials in this repo.
-GitHub Desktop's login is not automatically available to command-line Git.
-
-Until then: let the agent prepare/check/commit the branch locally, use Desktop's
-**Push origin / Publish branch**, and create the PR. The agent can review it via
-the read-capable connector. Owner approval remains necessary to make it live.
-Do not ask the owner to resolve raw conflict markers when the agent can safely
-prepare the resolution locally. Do not advertise fully automatic publication
-until write access has actually been verified.
+GitHub Desktop remains a fallback if CLI access stops working. Owner approval
+is still required before merging or publishing. Resolve clear homepage conflicts
+locally rather than asking the owner to edit conflict markers. If permissions
+or authentication block publication, state the limitation without claiming success.
