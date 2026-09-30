@@ -2,6 +2,22 @@
   box-sizing: border-box;
 }
 
+body.homepage {
+  box-sizing: content-box;
+  max-width: 800px;
+  margin: 8px auto;
+  padding: 0 16px;
+}
+
+.homepage img {
+  max-width: 100%;
+  height: auto;
+}
+
+.homepage iframe {
+  max-width: 100%;
+}
+
 .gift-cards {
   margin: 1rem 0;
 }
